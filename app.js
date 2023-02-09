@@ -1,18 +1,32 @@
-const app = angular.module('app', ['ngRoute']);
+const app = angular.module('app', ['ui.router']);
 
-app.config(function ($routeProvider) {
-  $routeProvider
-    .when('/', {
-      templateUrl: 'pages/home.html',
-      controller: 'HomeController',
-    })
-    .when('/tasks/:id', {
-      templateUrl: 'pages/edit.html',
-      controller: 'EditController',
-    })
-    .otherwise({
-      template: '<h2>404</h2>',
-    });
+app.config(function ($stateProvider, $urlRouterProvider) {
+  const homeState = {
+    name: 'home',
+    url: '/',
+    templateUrl: 'pages/home.html',
+    controller: 'HomeController',
+  };
+  const editState = {
+    name: 'edit',
+    url: '/tasks/:id',
+    templateUrl: 'pages/edit.html',
+    controller: 'EditController',
+  };
+  const notFoundState = {
+    name: '404',
+    templateUrl: 'pages/404.html',
+  };
+
+  $stateProvider.state(homeState);
+  $stateProvider.state(editState);
+  $stateProvider.state(notFoundState);
+
+  $urlRouterProvider.otherwise(function($injector, $location){
+    var state = $injector.get('$state');
+    state.go('404');
+    return $location.path();
+ });
 });
 
 app.run(function ($rootScope) {
@@ -26,7 +40,7 @@ app.run(function ($rootScope) {
   ];
 });
 
-app.controller('HomeController', function ($scope, $rootScope, $location) {
+app.controller('HomeController', function ($scope, $rootScope, $state) {
   $scope.error = false;
   $scope.checkError = function () {
     if ($scope.newTask) {
@@ -56,14 +70,14 @@ app.controller('HomeController', function ($scope, $rootScope, $location) {
       return task.id !== id;
     });
   };
-  $scope.editTask = function () {
-    $location.path('/tasks/' + this.task.id);
+  $scope.goToEdit = function (id) {
+    $state.go('edit', { id: id });
   };
 });
 
 app.controller(
   'EditController',
-  function ($scope, $rootScope, $routeParams, $location) {
+  function ($scope, $rootScope, $state, $stateParams) {
     $scope.error = false;
     $scope.checkError = function () {
       if ($scope.task.name) {
@@ -74,8 +88,10 @@ app.controller(
     };
 
     $scope.task = $rootScope.tasks.find(function (task) {
-      return task.id === parseInt($routeParams.id);
+      return task.id === parseInt($stateParams.id, 10);
     });
+
+    if(!$scope.task) $state.go('404');
 
     $scope.saveTask = function () {
       if (!$scope.task.name) {
@@ -90,7 +106,7 @@ app.controller(
         }
         return task;
       });
-      $location.path('/');
+      $state.go('home');
     };
   }
 );

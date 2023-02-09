@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
     <div class="app" ng-app="app">
       <h1>Todo App</h1>
-      <ng-view></ng-view>
+      <div ui-view></div>
     </div>
   </body>
 </html>
