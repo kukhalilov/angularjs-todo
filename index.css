@@ -1,0 +1,156 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-add,
+.form-edit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #f00;
+  margin-top: 0.4rem;
+}
+
+.input-container {
+  min-height: 3.8rem;
+}
+
+.input-add,
+.input-edit {
+  width: 26.5rem;
+  max-width: 90vw;
+  height: 2.4rem;
+  font-size: 1.1rem;
+  background-color: #333;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+}
+
+.button-add,
+.button-edit {
+  font-size: 1.1rem;
+  padding: 0.5rem 1.2rem;
+  height: 2.4rem;
+  outline: none;
+  border: none;
+  color: #fff;
+  background-color: rgb(6, 76, 120);
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button-add:hover,
+.button-edit:hover {
+  background-color: rgb(4, 103, 169);
+}
+
+.tasks-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tasks-list {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.task {
+  width: 35rem;
+  max-width: 90vw;
+  min-height: 2rem;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #333;
+  border-radius: 4px;
+}
+
+.task span {
+  display: block;
+  width: 29rem;
+  max-width: 50vw;
+  font-size: 1.1rem;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.task div:first-child {
+  display: flex;
+  gap: 0.7rem;
+  margin-right: 0.7rem;
+}
+
+.task.done {
+  opacity: 0.5;
+}
+
+.task.done span {
+  text-decoration: line-through;
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.actions i {
+  cursor: pointer;
+}
+
+.actions i:hover {
+  color: #f00;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container" ng-controller="EditController">
+      <h2>Edit task</h2>
+      <form class="form-edit">
+        <div class="input-container">
+          <input
+            class="input-edit"
+            type="text"
+            ng-model="task.name"
+            ng-change="checkError()"
+          />
+          <p ng-show="error" class="error">Task name must not be empty</p>
+        </div>
+        <button class="button-edit" ng-click="saveTask()">Save</button>
+      </form>
+    </div>
+  </body>
+</html>

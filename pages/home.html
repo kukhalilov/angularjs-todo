@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container" ng-controller="HomeController">
+      <form class="form-add">
+        <div class="input-container">
+          <input
+            class="input-add"
+            type="text"
+            ng-model="newTask"
+            ng-change="checkError()"
+          />
+          <p ng-show="error" class="error">Task name must not be empty</p>
+        </div>
+
+        <button class="button-add" ng-click="addTask()">Add Task</button>
+      </form>
+
+      <div class="tasks-header">
+        <h2>Tasks</h2>
+        <p>There are {{tasks.length === 0 ? 'no' : tasks.length}} tasks</p>
+      </div>
+
+      <ul class="tasks-list">
+        <li
+          ng-class="task.done ? 'task done' : 'task'"
+          ng-repeat="task in tasks.slice().reverse()"
+        >
+          <div>
+            <input type="checkbox" ng-model="task.done" />
+            <span>{{task.name}}</span>
+          </div>
+          <div class="actions">
+            <i class="fas fa-edit" ng-click="editTask()"></i>
+            <i class="fas fa-trash" ng-click="deleteTask(task.id)"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
